@@ -2,6 +2,7 @@ const WebSocket = require('ws')
 const CryptoJS = require('crypto-js')
 const { v4: GUID } = require('uuid');
 
+// Do not submit actual keys that give access to anything of value to GIT :-)
 const API_KEY = 'w6AcfksrG7GiEFoN'
 const SECRET = 'gZ0kkI9p8bHHDaBjO3Cyij87SrToYPA3'
 

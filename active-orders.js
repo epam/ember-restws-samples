@@ -1,6 +1,7 @@
 const Request = require("request");
 const CryptoJS = require('crypto-js')
 
+// Do not submit actual keys that give access to anything of value to GIT :-)
 const API_KEY = 'w6AcfksrG7GiEFoN'
 const SECRET = 'gZ0kkI9p8bHHDaBjO3Cyij87SrToYPA3'
 
