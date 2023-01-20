@@ -5,7 +5,8 @@ const API_KEY = 'w6AcfksrG7GiEFoN'
 const SECRET = 'gZ0kkI9p8bHHDaBjO3Cyij87SrToYPA3'
 
 var request = JSON.stringify({
-    projection: "Source/ModuleKey/Symbol"
+    projection: "Exchange/Symbol", // make sure it matches risk projections configured in ember.conf
+
     // traderId: "11336866712", // optional filter
     // account: "GOLD",         // optional filter
     // exchangeId: "CME"        // optional filter
