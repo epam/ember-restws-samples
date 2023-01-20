@@ -2,9 +2,8 @@ const Request = require("request");
 const CryptoJS = require('crypto-js')
 
 // Do not submit actual keys that give access to anything of value to GIT :-)
-const API_KEY = 'TbrzsXVKb2nDJn9t'
-const SECRET = '5fMqCLguqmuWsRXBgMg5NQNPh9TEK6tp'
-
+const API_KEY = 'w6AcfksrG7GiEFoN'
+const SECRET = 'gZ0kkI9p8bHHDaBjO3Cyij87SrToYPA3'
 
 const users = [ 'BOB', 'JOHN', 'MILES', 'PAUL']
 
@@ -44,12 +43,12 @@ function setPosition (request) {
                 "X-API-KEY": API_KEY,
                 "X-SIGNATURE": signature,
             },
-            url: 'http://3.139.128.224:8987/api/v1/position/adjust', // https:// for PROD
+            url: 'http://localhost:8988/api/v1/position/adjust', // https:// for PROD
             body: requestAsText
         },
         function optionalCallback(err, httpResponse, body) {
             if (err)
-                return console.error('Submit failed:', err);
+                return console.error('Request failed:', err);
     
             console.log('Server responded with [%s] %s', httpResponse.statusCode, body);
         }
