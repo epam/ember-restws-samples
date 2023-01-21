@@ -17,13 +17,13 @@ const auth_request = {
     apiKey:       API_KEY,
     signature:    signature,
     salt:         salt,
-    timestamp:    timestamp.toISOString()
+    timestamp:    timestamp
 };
 
 const order = {
     $type:          'OrderNewRequest',
     orderId:        GUID(),
-    timestamp:      timestamp.toISOString(),
+    timestamp:      timestamp,
     side:           'BUY',
     quantity:       100,
     symbol:         'BTC/USD',
