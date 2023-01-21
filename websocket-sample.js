@@ -9,7 +9,8 @@ const SECRET = 'gZ0kkI9p8bHHDaBjO3Cyij87SrToYPA3'
 const salt = GUID();
 const timestamp = new Date();
 
-const data = API_KEY + '/' + salt + '/' + timestamp.getTime();
+
+const data = API_KEY + '/' + salt + '/' + timestamp.toISOString();
 const signature = CryptoJS.HmacSHA384(data, SECRET).toString(CryptoJS.enc.Hex);
 const auth_request = {
     $type:        'AuthRequest',
@@ -22,7 +23,7 @@ const auth_request = {
 const order = {
     $type:          'OrderNewRequest',
     orderId:        GUID(),
-    timestamp:      '2020-12-15T17:34:26.839Z',
+    timestamp:      timestamp.toISOString(),
     side:           'BUY',
     quantity:       100,
     symbol:         'BTC/USD',

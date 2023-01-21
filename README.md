@@ -14,6 +14,7 @@ Install NodeJS
 ```sh
 npm install requests
 npm install cryptojs
+npm install ws
 ```
 
 ## Run the sample
