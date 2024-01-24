@@ -12,6 +12,7 @@ Install NodeJS
 ## Add necessary modules
 
 ```sh
+npm install uuid
 npm install axios
 npm install ws
 ```
