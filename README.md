@@ -12,8 +12,7 @@ Install NodeJS
 ## Add necessary modules
 
 ```sh
-npm install requests
-npm install cryptojs
+npm install axios
 npm install ws
 ```
 

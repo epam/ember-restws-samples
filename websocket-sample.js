@@ -7,29 +7,29 @@ const API_KEY = 'w6AcfksrG7GiEFoN'
 const SECRET = 'gZ0kkI9p8bHHDaBjO3Cyij87SrToYPA3'
 
 const salt = GUID();
-const timestamp = new Date();
+const now = new Date();
 
 
-const data = API_KEY + '/' + salt + '/' + timestamp.toISOString();
+const data = API_KEY + '/' + salt + '/' + now.toISOString();
 const signature = Crypto.createHmac('sha384', SECRET).update(data).digest('hex');
 const auth_request = {
     $type:        'AuthRequest',
     apiKey:       API_KEY,
     signature:    signature,
     salt:         salt,
-    timestamp:    timestamp
+    timestamp:    now
 };
 
 const order = {
-    $type:          'OrderNewRequest',
-    orderId:        GUID(),
-    timestamp:      timestamp,
-    side:           'BUY',
-    quantity:       100,
-    symbol:         'BTC/USD',
-    orderType:      'MARKET',
-    destinationId:  'SIM',
-    exchangeId:     'FILL'
+    $type:              'OrderNewRequest',
+    orderId:            GUID(),
+    originalTimestamp:  now,
+    side:              'BUY',
+    quantity:           100,
+    symbol:            'BTC/USD',
+    orderType:         'MARKET',
+    destinationId:     'SIM',
+    exchangeId:        'FILL'
 };
 
 const wss = new WebSocket('ws://localhost:8988/api/v1') // Use wss:// for PROD
