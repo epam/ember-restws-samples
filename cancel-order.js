@@ -1,5 +1,5 @@
 const Request = require("request");
-const CryptoJS = require('crypto-js')
+const CryptoJS = require('crypto')
 
 // Do not submit actual keys that give access to anything of value to GIT :-)
 const API_KEY = 'w6AcfksrG7GiEFoN'
@@ -9,7 +9,7 @@ var request = JSON.stringify({
     orderId: 'BACKEND-16a92e0f94e5f100' //NODE: We can only cancel orders that belong to the source associated with our API key
 });
 
-var signature = CryptoJS.HmacSHA384(request, SECRET).toString(CryptoJS.enc.Hex);
+var signature = crypto.createHmac('sha384', SECRET).update(request).digest('hex');
 
 var a = Request.post(
     {

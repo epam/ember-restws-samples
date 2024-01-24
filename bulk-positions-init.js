@@ -1,5 +1,5 @@
 const Request = require("request");
-const CryptoJS = require('crypto-js')
+const CryptoJS = require('crypto')
 
 // Do not submit actual keys that give access to anything of value to GIT :-)
 const API_KEY = 'w6AcfksrG7GiEFoN'
@@ -34,7 +34,8 @@ function setSourceAccountCurrencyPosition (user, account, amount) {
 
 function setPosition (request) {
     const requestAsText = JSON.stringify(request);
-    const signature = CryptoJS.HmacSHA384(requestAsText, SECRET).toString(CryptoJS.enc.Hex);
+    const signature = crypto.createHmac('sha384', SECRET).update(requestAsText).digest('hex');
+
     
     Request.post(
         {
