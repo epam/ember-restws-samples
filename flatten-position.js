@@ -1,5 +1,5 @@
-const Request = require("request");
-const CryptoJS = require('crypto')
+const Axios = require('axios');
+const Crypto = require('crypto')
 
 // Do not submit actual keys that give access to anything of value to GIT :-)
 const API_KEY = 'w6AcfksrG7GiEFoN'
@@ -13,22 +13,19 @@ var positionSnapshot = JSON.stringify({
     realizedPnL: 0,
 });
 
-var signature = crypto.createHmac('sha384', SECRET).update(positionSnapshot).digest('hex');
+var signature = Crypto.createHmac('sha384', SECRET).update(positionSnapshot).digest('hex');
 
-var a = Request.post(
+Axios.post('http://localhost:8988/api/v1/position/adjust', positionSnapshot,
     {
         headers: {
             "Content-Type": "application/json",
             "X-API-KEY": API_KEY,
             "X-SIGNATURE": signature,
-        },
-        url: 'http://localhost:8988/api/v1/position/adjust', // https:// for PROD
-        body: positionSnapshot
-    },
-    function optionalCallback(err, httpResponse, body) {
-        if (err)
-            return console.error('Submit failed:', err);
-
-        console.log('Server responded with [%s] %s', httpResponse.statusCode, body);
+        }
     }
-);
+).then((response) => {
+    console.log(response.data);
+})
+.catch((error) => {
+    console.error(error);
+});

@@ -1,5 +1,5 @@
-const Request = require("request");
-const CryptoJS = require('crypto')
+const Axios = require('axios');
+const Crypto = require('crypto')
 
 // Do not submit actual keys that give access to anything of value to GIT :-)
 const API_KEY = 'w6AcfksrG7GiEFoN'
@@ -9,22 +9,19 @@ var request = JSON.stringify({
     orderId: 'BACKEND-16a92e0f94e5f100' //NODE: We can only cancel orders that belong to the source associated with our API key
 });
 
-var signature = crypto.createHmac('sha384', SECRET).update(request).digest('hex');
+var signature = Crypto.createHmac('sha384', SECRET).update(request).digest('hex');
 
-var a = Request.post(
+var a = Axios.post('http://localhost:8988/api/v1/order/cancel', request, // https:// for PROD
     {
         headers: {
             "Content-Type": "application/json",
             "X-API-KEY": API_KEY,
             "X-SIGNATURE": signature,
-        },
-        url: 'http://localhost:8988/api/v1/order/cancel', // https:// for PROD
-        body: request
-    },
-    function optionalCallback(err, httpResponse, body) {
-        if (err)
-            return console.error('Submit failed:', err);
-
-        console.log('Server responded with [%s] %s', httpResponse.statusCode, body);
+        }
     }
-);
+).then((response) => {
+    console.log(response.data);
+})
+.catch((error) => {
+    console.error(error);
+});

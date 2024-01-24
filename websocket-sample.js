@@ -1,5 +1,5 @@
 const WebSocket = require('ws')
-const CryptoJS = require('crypto')
+const Crypto = require('crypto')
 const { v4: GUID } = require('uuid');
 
 // Do not submit actual keys that give access to anything of value to GIT :-)
@@ -11,7 +11,7 @@ const timestamp = new Date();
 
 
 const data = API_KEY + '/' + salt + '/' + timestamp.toISOString();
-const signature = crypto.createHmac('sha384', SECRET).update(data).digest('hex');
+const signature = Crypto.createHmac('sha384', SECRET).update(data).digest('hex');
 const auth_request = {
     $type:        'AuthRequest',
     apiKey:       API_KEY,
